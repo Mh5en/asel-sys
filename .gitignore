@@ -6,4 +6,6 @@ build/
 Thumbs.db
 .vscode/
 .idea/
+.file-distribution-plan.txt
+.daily-push-progress.txt
 
