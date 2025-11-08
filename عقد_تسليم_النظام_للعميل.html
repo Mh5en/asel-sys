@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عقد تسليم نظام إدارة المخزون والمحاسبة</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'IBM Plex Sans Arabic', Arial, sans-serif;
+            line-height: 1.8;
+            color: #1f2937;
+            background: #ffffff;
+            padding: 40px 50px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            color: #2563eb;
+            font-size: 2.2em;
+            margin: 30px 0 20px;
+            border-bottom: 4px solid #2563eb;
+            padding-bottom: 15px;
+            font-weight: 700;
+            text-align: center;
+        }
+        
+        h2 {
+            color: #1e40af;
+            font-size: 1.8em;
+            margin: 30px 0 15px;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 10px;
+            font-weight: 600;
+            page-break-after: avoid;
+        }
+        
+        h3 {
+            color: #3b82f6;
+            font-size: 1.4em;
+            margin: 20px 0 10px;
+            font-weight: 600;
+        }
+        
+        .parties {
+            background: #f8fafc;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        
+        .party {
+            margin: 20px 0;
+        }
+        
+        .party-title {
+            font-weight: 700;
+            color: #1e40af;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+        
+        .party-info {
+            margin: 8px 0;
+            padding-right: 15px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            background: #ffffff;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        table thead {
+            background: #2563eb;
+            color: #ffffff;
+        }
+        
+        table th {
+            padding: 15px;
+            text-align: right;
+            font-weight: 600;
+            border: 1px solid #1e40af;
+        }
+        
+        table td {
+            padding: 12px 15px;
+            border: 1px solid #e5e7eb;
+            text-align: right;
+        }
+        
+        table tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        table tbody tr:hover {
+            background: #eff6ff;
+        }
+        
+        .total-row {
+            background: #dbeafe !important;
+            font-weight: 700;
+            font-size: 1.1em;
+            color: #1e40af;
+        }
+        
+        .price {
+            font-weight: 600;
+            color: #059669;
+            text-align: left;
+            direction: ltr;
+        }
+        
+        .article {
+            margin: 25px 0;
+            padding: 20px;
+            background: #ffffff;
+            border-right: 4px solid #2563eb;
+        }
+        
+        .article-content {
+            margin: 15px 0;
+            line-height: 2;
+        }
+        
+        .article-content ul, .article-content ol {
+            margin: 15px 0;
+            padding-right: 30px;
+        }
+        
+        .article-content li {
+            margin: 10px 0;
+        }
+        
+        .signature-section {
+            margin: 50px 0;
+            padding: 30px;
+            background: #f8fafc;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+        }
+        
+        .signatures {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+        
+        .signature-box {
+            width: 45%;
+            text-align: center;
+        }
+        
+        .signature-line {
+            border-top: 2px solid #1f2937;
+            margin: 60px 0 10px;
+            padding-top: 10px;
+        }
+        
+        .notes {
+            background: #fef3c7;
+            border: 2px solid #f59e0b;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 30px 0;
+        }
+        
+        .notes h3 {
+            color: #92400e;
+            margin-bottom: 15px;
+        }
+        
+        .notes ul {
+            list-style: none;
+            padding-right: 0;
+        }
+        
+        .notes li {
+            margin: 10px 0;
+            padding-right: 25px;
+            position: relative;
+        }
+        
+        .notes li:before {
+            content: "✓";
+            position: absolute;
+            right: 0;
+            color: #059669;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        .highlight {
+            background: #dbeafe;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        
+        .date-info {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: #eff6ff;
+            border-radius: 8px;
+        }
+        
+        @media print {
+            body {
+                padding: 20px;
+            }
+            
+            .article {
+                page-break-inside: avoid;
+            }
+            
+            table {
+                page-break-inside: avoid;
+            }
+            
+            .signature-section {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>عقد تسليم نظام إدارة المخزون والمحاسبة</h1>
+    
+    <div class="parties">
+        <div class="party">
+            <div class="party-title">الطرف الأول (المهندس/المطور):</div>
+            <div class="party-info">الاسم: _________________________________</div>
+            <div class="party-info">الهوية الوطنية/السجل التجاري: _________________________________</div>
+            <div class="party-info">العنوان: _________________________________</div>
+            <div class="party-info">الهاتف: _________________________________</div>
+            <div class="party-info">البريد الإلكتروني: _________________________________</div>
+        </div>
+        
+        <div class="party">
+            <div class="party-title">الطرف الثاني (العميل):</div>
+            <div class="party-info">الاسم/اسم الشركة: _________________________________</div>
+            <div class="party-info">الهوية الوطنية/السجل التجاري: _________________________________</div>
+            <div class="party-info">العنوان: _________________________________</div>
+            <div class="party-info">الهاتف: _________________________________</div>
+            <div class="party-info">البريد الإلكتروني: _________________________________</div>
+        </div>
+    </div>
+    
+    <div class="article">
+        <h2>المادة الأولى: موضوع العقد</h2>
+        <div class="article-content">
+            يتعهد الطرف الأول بتسليم نظام إدارة المخزون والمحاسبة (نظام شركة أسيل) للطرف الثاني وفق المواصفات المذكورة في هذا العقد، وذلك مقابل المبلغ الإجمالي المتفق عليه.
+        </div>
+    </div>
+    
+    <div class="article">
+        <h2>المادة الثانية: مواصفات النظام والمميزات</h2>
+        
+        <h3>2.1 مميزات إدارة المنتجات والمخزون:</h3>
+        <div class="article-content">
+            <ul>
+                <li>✅ إضافة وتعديل وحذف المنتجات بسهولة</li>
+                <li>✅ إدارة الأصناف والفئات بشكل منظم</li>
+                <li>✅ تتبع المخزون الحالي بشكل فوري ودقيق</li>
+                <li>✅ إدارة وحدات القياس (صغيرة/كبيرة) مع معامل التحويل</li>
+                <li>✅ إدارة أسعار البيع للوحدات المختلفة</li>
+                <li>✅ تنبيهات تلقائية عند انخفاض المخزون</li>
+                <li>✅ تعديل المخزون يدوياً مع تسجيل الأسباب</li>
+                <li>✅ سجل كامل لتعديلات المخزون</li>
+            </ul>
+        </div>
+        
+        <h3>2.2 مميزات إدارة المبيعات:</h3>
+        <div class="article-content">
+            <ul>
+                <li>✅ إنشاء فواتير المبيعات بسهولة وسرعة</li>
+                <li>✅ إضافة منتجات متعددة في الفاتورة الواحدة</li>
+                <li>✅ حساب الضرائب والخصومات تلقائياً</li>
+                <li>✅ حساب الشحن والتكاليف الإضافية</li>
+                <li>✅ تحديث المخزون تلقائياً عند البيع</li>
+                <li>✅ تحديث رصيد العميل تلقائياً</li>
+                <li>✅ طباعة فواتير احترافية جاهزة</li>
+                <li>✅ إدارة المرتجعات بسهولة</li>
+            </ul>
+        </div>
+        
+        <h3>2.3 مميزات إدارة المشتريات:</h3>
+        <div class="article-content">
+            <ul>
+                <li>✅ إنشاء فواتير المشتريات بسرعة</li>
+                <li>✅ إضافة منتجات متعددة في الفاتورة</li>
+                <li>✅ تحديث المخزون تلقائياً عند الشراء</li>
+                <li>✅ تحديث رصيد المورد تلقائياً</li>
+                <li>✅ تتبع المشتريات والموردين</li>
+            </ul>
+        </div>
+        
+        <h3>2.4 مميزات إدارة العملاء:</h3>
+        <div class="article-content">
+            <ul>
+                <li>✅ إدارة بيانات العملاء بشكل شامل</li>
+                <li>✅ تتبع أرصدة العملاء تلقائياً</li>
+                <li>✅ إدارة سندات القبض</li>
+                <li>✅ سجل كامل لحركات العملاء</li>
+                <li>✅ تقارير مفصلة عن العملاء</li>
+                <li>✅ إدارة الحد الائتماني للعملاء</li>
+            </ul>
+        </div>
+        
+        <h3>2.5 مميزات إدارة الموردين:</h3>
+        <div class="article-content">
+            <ul>
+                <li>✅ إدارة بيانات الموردين بشكل كامل</li>
+                <li>✅ تتبع أرصدة الموردين تلقائياً</li>
+                <li>✅ إدارة سندات الصرف</li>
+                <li>✅ سجل كامل لحركات الموردين</li>
+                <li>✅ تقارير مفصلة عن الموردين</li>
+            </ul>
+        </div>
+        
+        <h3>2.6 مميزات التقارير المالية:</h3>
+        <div class="article-content">
+            <ul>
+                <li>✅ تقارير المبيعات الشاملة (يومية، أسبوعية، شهرية، سنوية)</li>
+                <li>✅ تقارير المشتريات التفصيلية</li>
+                <li>✅ تقارير الأرباح والخسائر</li>
+                <li>✅ تقارير العملاء والموردين</li>
+                <li>✅ تقارير المخزون والمنتجات</li>
+                <li>✅ تقارير مالية إحصائية متقدمة</li>
+                <li>✅ إمكانية تصدير التقارير</li>
+            </ul>
+        </div>
+        
+        <h3>2.7 مميزات إدارة الأصول والمصروفات:</h3>
+        <div class="article-content">
+            <ul>
+                <li>✅ تسجيل الأصول الثابتة</li>
+                <li>✅ حساب الإهلاك تلقائياً</li>
+                <li>✅ تقارير الأصول الشاملة</li>
+                <li>✅ إدارة المصروفات التشغيلية</li>
+                <li>✅ تصنيف المصروفات</li>
+                <li>✅ تقارير المصروفات التفصيلية</li>
+            </ul>
+        </div>
+        
+        <h3>2.8 مميزات الأمان والصلاحيات:</h3>
+        <div class="article-content">
+            <ul>
+                <li>✅ نظام تسجيل دخول آمن</li>
+                <li>✅ إدارة المستخدمين المتعددة</li>
+                <li>✅ نظام صلاحيات متقدم ومرن</li>
+                <li>✅ تخصيص الصلاحيات لكل مستخدم</li>
+                <li>✅ سجل كامل لعمليات المستخدمين</li>
+                <li>✅ حماية البيانات من الوصول غير المصرح</li>
+            </ul>
+        </div>
+        
+        <h3>2.9 مميزات النسخ الاحتياطي:</h3>
+        <div class="article-content">
+            <ul>
+                <li>✅ نسخ احتياطي تلقائي للبيانات</li>
+                <li>✅ استعادة البيانات بسهولة</li>
+                <li>✅ تصدير البيانات بصيغ متعددة</li>
+                <li>✅ استيراد البيانات بسهولة</li>
+                <li>✅ حماية البيانات من الفقدان</li>
+            </ul>
+        </div>
+        
+        <h3>2.10 المميزات التقنية والتصميم:</h3>
+        <div class="article-content">
+            <ul>
+                <li>✅ نظام سطح مكتب يعمل على Windows</li>
+                <li>✅ قاعدة بيانات محلية (SQLite) سريعة وآمنة</li>
+                <li>✅ واجهة عربية كاملة واحترافية</li>
+                <li>✅ تصميم عصري وجذاب</li>
+                <li>✅ سهولة الاستخدام والتنقل</li>
+                <li>✅ سرعة في الأداء والاستجابة</li>
+                <li>✅ لا يحتاج اتصال بالإنترنت للعمل</li>
+                <li>✅ يعمل على أجهزة متعددة</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="article">
+        <h2>المادة الثالثة: التزامات الطرف الأول (المهندس)</h2>
+        <h3>3.1 التسليم:</h3>
+        <div class="article-content">
+            <ul>
+                <li>تسليم النظام كاملاً وجاهزاً للعمل</li>
+                <li>تسليم جميع ملفات الشعار (Logo) بصيغ متعددة</li>
+                <li>توفير دليل استخدام شامل بالعربية</li>
+                <li>تثبيت النظام على أجهزة العميل</li>
+                <li>تسليم جميع ملفات النظام والبيانات</li>
+            </ul>
+        </div>
+        
+        <h3>3.2 فترة الضمان:</h3>
+        <div class="article-content">
+            <ul>
+                <li>ضمان مجاني لمدة <span class="highlight">3 أشهر</span> من تاريخ تسليم النظام النهائي</li>
+                <li>يشمل الضمان إصلاح الأعطال والأخطاء البرمجية</li>
+                <li>يشمل الضمان الدعم الفني خلال فترة الضمان</li>
+            </ul>
+        </div>
+        
+        <h3>3.3 التدريب:</h3>
+        <div class="article-content">
+            <ul>
+                <li>توفير تدريب أساسي لفريق العمل على استخدام النظام</li>
+                <li>عدد ساعات التدريب: <span class="highlight">4 ساعات</span> (مشمولة في السعر)</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="article">
+        <h2>المادة الرابعة: التزامات الطرف الثاني (العميل)</h2>
+        <h3>4.1 المدفوعات:</h3>
+        <div class="article-content">
+            <ul>
+                <li>الالتزام بسداد المبلغ الإجمالي <span class="highlight">11,000 جنيه مصري</span> كاملاً</li>
+                <li>السداد يتم: _________________________________</li>
+            </ul>
+        </div>
+        
+        <h3>4.2 التعاون:</h3>
+        <div class="article-content">
+            <ul>
+                <li>توفير جميع المعلومات والبيانات اللازمة</li>
+                <li>التعاون أثناء مراحل التثبيت والتدريب</li>
+                <li>توفير بيئة عمل مناسبة للتثبيت</li>
+            </ul>
+        </div>
+        
+        <h3>4.3 الاستخدام:</h3>
+        <div class="article-content">
+            <ul>
+                <li>استخدام النظام للأغراض المتفق عليها فقط</li>
+                <li>عدم نسخ أو إعادة توزيع النظام بدون إذن خطي</li>
+                <li>الحفاظ على سرية بيانات الدخول</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="article">
+        <h2>المادة الخامسة: المدفوعات والشروط المالية</h2>
+        <h3>5.1 القيمة الإجمالية:</h3>
+        <div class="article-content">
+            <p style="font-size: 1.2em; font-weight: 700; color: #059669;">
+                القيمة الإجمالية: <span class="highlight">11,000 جنيه مصري</span> (أحد عشر ألف جنيه مصري)
+            </p>
+        </div>
+        
+        <h3>5.2 طريقة السداد:</h3>
+        <div class="article-content">
+            <ul>
+                <li>☐ سداد كامل عند التسليم: <strong>11,000 جنيه مصري</strong></li>
+                <li>☐ دفعة أولى: <strong>_____ جنيه مصري</strong> - دفعة نهائية عند التسليم: <strong>_____ جنيه مصري</strong></li>
+            </ul>
+        </div>
+        
+        <h3>5.3 الدعم والصيانة (بعد انتهاء الضمان):</h3>
+        <div class="article-content">
+            <ul>
+                <li>الدعم الفني الشهري: <strong>حسب الاتفاق</strong></li>
+                <li>الصيانة والتحديثات: <strong>حسب الطلب</strong></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="article">
+        <h2>المادة السادسة: ملكية الحقوق الفكرية</h2>
+        <h3>6.1 حقوق الملكية:</h3>
+        <div class="article-content">
+            <ul>
+                <li>جميع حقوق الملكية الفكرية للنظام تبقى ملكاً للطرف الأول</li>
+                <li>يحق للطرف الثاني استخدام النظام وفق الشروط المذكورة</li>
+                <li>الشعار (Logo) المصمم يصبح ملكية للطرف الثاني بعد السداد الكامل</li>
+            </ul>
+        </div>
+        
+        <h3>6.2 البيانات:</h3>
+        <div class="article-content">
+            <ul>
+                <li>بيانات العميل (العملاء، المنتجات، الفواتير، إلخ) هي ملكية حصرية للطرف الثاني</li>
+                <li>يلتزم الطرف الأول بالحفاظ على سرية بيانات العميل</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="article">
+        <h2>المادة الثامنة: السرية والخصوصية</h2>
+        <div class="article-content">
+            <ul>
+                <li>يلتزم كلا الطرفين بالحفاظ على سرية المعلومات المتبادلة</li>
+                <li>عدم الكشف عن أي معلومات تتعلق بالمشروع لطرف ثالث بدون موافقة خطية</li>
+                <li>يبقى التزام السرية سارياً حتى بعد انتهاء العقد</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="article">
+        <h2>المادة الثامنة: الدعم الفني والصيانة</h2>
+        <h3>8.1 فترة الضمان (3 أشهر):</h3>
+        <div class="article-content">
+            <ul>
+                <li>إصلاح الأعطال والأخطاء</li>
+                <li>الإجابة على الاستفسارات الفنية</li>
+                <li>التحديثات التصحيحية (Bug Fixes)</li>
+            </ul>
+        </div>
+        
+        <h3>8.2 بعد انتهاء الضمان:</h3>
+        <div class="article-content">
+            <ul>
+                <li>الدعم الفني والصيانة مقابل رسوم شهرية أو حسب الطلب</li>
+                <li>التحديثات الكبرى والإضافات الجديدة: <strong>حسب الاتفاق</strong></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="article">
+        <h2>المادة التاسعة: الضمانات والمسؤولية</h2>
+        <h3>9.1 ضمانات الطرف الأول:</h3>
+        <div class="article-content">
+            <ul>
+                <li>يضمن الطرف الأول أن النظام يعمل وفق المواصفات المذكورة</li>
+                <li>يضمن إصلاح أي عيوب أو أخطاء برمجية خلال فترة الضمان</li>
+                <li>يضمن جودة الشعار المصمم</li>
+            </ul>
+        </div>
+        
+        <h3>9.2 حدود المسؤولية:</h3>
+        <div class="article-content">
+            <p>لا يتحمل الطرف الأول مسؤولية الأضرار الناتجة عن:</p>
+            <ul>
+                <li>سوء استخدام النظام</li>
+                <li>التعديلات غير المصرح بها</li>
+                <li>الأعطال في الأجهزة أو الشبكات</li>
+                <li>فقدان البيانات بسبب عدم عمل النسخ الاحتياطي</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="article">
+        <h2>المادة الحادية عشرة: إنهاء العقد</h2>
+        <div class="article-content">
+            <ul>
+                <li>ينتهي العقد بشكل طبيعي بعد تسليم النظام وسداد المبلغ كاملاً</li>
+                <li>يحق لأي من الطرفين إنهاء العقد إذا أخل الطرف الآخر بالتزاماته</li>
+                <li>يجب إشعار الطرف الآخر كتابياً</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="article">
+        <h2>المادة الثانية عشرة: حل النزاعات</h2>
+        <div class="article-content">
+            <ul>
+                <li>في حالة النزاع، يحاول الطرفان حله بالتفاوض الودي</li>
+                <li>في حالة عدم التوصل لحل، يتم اللجوء إلى القضاء المختص</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="article">
+        <h2>المادة الثالثة عشرة: أحكام عامة</h2>
+        <div class="article-content">
+            <ul>
+                <li>لا يجوز تعديل هذا العقد إلا بموافقة خطية من كلا الطرفين</li>
+                <li>لا يتحمل أي من الطرفين مسؤولية عدم تنفيذ التزاماته بسبب قوة قاهرة</li>
+                <li>يخضع هذا العقد للقوانين المعمول بها في جمهورية مصر العربية</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="signature-section">
+        <h2>المادة الثالثة عشرة: التوقيعات</h2>
+        <div class="date-info">
+            تم تحرير هذا العقد بتاريخ <strong>___/___/______</strong> الموافق <strong>___/___/______ هـ</strong>
+        </div>
+        
+        <div class="signatures">
+            <div class="signature-box">
+                <div class="party-title">الطرف الأول (المهندس/المطور):</div>
+                <div style="margin: 20px 0;">
+                    ___________________________
+                </div>
+                <div class="signature-line">
+                    التوقيع: _________________
+                </div>
+                <div style="margin-top: 10px;">
+                    الختم: ___________________
+                </div>
+            </div>
+            
+            <div class="signature-box">
+                <div class="party-title">الطرف الثاني (العميل):</div>
+                <div style="margin: 20px 0;">
+                    ___________________________
+                </div>
+                <div class="signature-line">
+                    التوقيع: _________________
+                </div>
+                <div style="margin-top: 10px;">
+                    الختم: ___________________
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="notes">
+        <h3>ملاحظات مهمة:</h3>
+        <ul>
+            <li>تم تفصيل جميع الأعمال والخدمات مع أسعارها بشكل منفصل</li>
+            <li>القيمة الإجمالية: 11,000 جنيه مصري</li>
+            <li>يشمل العقد جميع المكونات المذكورة في الجدول التفصيلي</li>
+            <li>يرجى ملء جميع الأماكن الفارغة قبل التوقيع</li>
+            <li>يفضل مراجعة العقد مع محامي قبل التوقيع</li>
+            <li>احتفظ بنسخة موقعة من العقد لدى كلا الطرفين</li>
+        </ul>
+    </div>
+    
+    <div class="date-info" style="margin-top: 40px;">
+        <p><strong>تم إعداد هذا العقد بتاريخ:</strong> _______________</p>
+        <p><strong>مكان التوقيع:</strong> _______________</p>
+    </div>
+</body>
+</html>
+
+
+
