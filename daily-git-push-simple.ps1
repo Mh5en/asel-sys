@@ -40,48 +40,105 @@ if (-not $remoteUrl) {
 # Create or update daily log file
 $logFile = "daily-commits-log.md"
 $today = Get-Date -Format "yyyy-MM-dd"
-$startDate = (Get-Date).AddDays(-30)
-$dayNumber = [math]::Floor((New-TimeSpan -Start $startDate -End (Get-Date)).TotalDays) + 1
+$time = Get-Date -Format "HH:mm:ss"
 
-# Read file if exists
+# Calculate day number (start from day 1)
+$progressFile = ".daily-push-progress.txt"
+$dayNumber = 1
+
+if (Test-Path $progressFile) {
+    $progressContent = Get-Content $progressFile -Raw
+    if ($progressContent -match "DayNumber:\s*(\d+)") {
+        $dayNumber = [int]$matches[1] + 1
+    }
+}
+
+# Check if we've already pushed today
+$lastPushDate = ""
+if (Test-Path $progressFile) {
+    $progressContent = Get-Content $progressFile -Raw
+    if ($progressContent -match "LastPushDate:\s*([^\r\n]+)") {
+        $lastPushDate = $matches[1].Trim()
+    }
+}
+
+# If already pushed today, skip
+if ($lastPushDate -eq $today) {
+    Write-Host "Already pushed today ($today). Skipping..." -ForegroundColor Yellow
+    exit 0
+}
+
+# If day number exceeds 30, reset or stop
+if ($dayNumber -gt 30) {
+    Write-Host "30 days completed! Stopping daily pushes." -ForegroundColor Green
+    exit 0
+}
+
+# Read log file if exists
 $logContent = @"
 # Daily GitHub Push Log
 
 This file is updated daily as part of daily GitHub updates.
 
+## Progress: Day $dayNumber of 30
+
 "@
 
 if (Test-Path $logFile) {
-    $logContent = Get-Content $logFile -Raw -Encoding UTF8
+    $existingContent = Get-Content $logFile -Raw -Encoding UTF8
+    # Keep the header and add new entry
+    if ($existingContent -match "(?s)(# Daily GitHub Push Log.*?## Progress: Day \d+ of 30)") {
+        $logContent = $matches[1] -replace "## Progress: Day \d+ of 30", "## Progress: Day $dayNumber of 30"
+    } else {
+        $logContent = $existingContent
+    }
 }
 
-# Add new entry
+# Add new entry for today
 $newEntry = @"
 
-## Day $today
+---
+
+## Day $dayNumber - $today
 
 - **Date**: $today
-- **Time**: $(Get-Date -Format "HH:mm:ss")
+- **Time**: $time
 - **Day Number**: $dayNumber of 30
+- **Status**: ✅ Successfully pushed to GitHub
 
-Project updated successfully today! ✅
+### What was updated today:
+- Updated daily commit log
+- Added progress tracking
+- Daily automated push completed
+
+### Notes:
+Working on the Asel System project. Making steady progress each day!
 
 "@
 
-# Check if entry for today exists
-if ($logContent -notmatch "## Day $today") {
+# Add entry if not exists for today
+if ($logContent -notmatch "## Day $dayNumber - $today") {
     $logContent += $newEntry
     Set-Content -Path $logFile -Value $logContent -Encoding UTF8
-    Write-Host "Updated daily log file" -ForegroundColor Green
+    Write-Host "Updated daily log file - Day $dayNumber" -ForegroundColor Green
 } else {
-    Write-Host "Log already updated today" -ForegroundColor Yellow
-    # Update time only
-    $logContent = $logContent -replace "(\*\*Time\*\*: )\d{2}:\d{2}:\d{2}", "`$1$(Get-Date -Format 'HH:mm:ss')"
-    Set-Content -Path $logFile -Value $logContent -Encoding UTF8
+    Write-Host "Log entry for today already exists" -ForegroundColor Yellow
 }
 
+# Update progress file
+$progressContent = @"
+LastPushDate: $today
+LastPushTime: $time
+DayNumber: $dayNumber
+TotalDays: 30
+"@
+Set-Content -Path $progressFile -Value $progressContent -Encoding UTF8
+
+# Always add the log file and progress file
+git add $logFile
+git add $progressFile
+
 # Check for changes
-git add .
 $status = git status --porcelain
 
 if ($status) {
@@ -91,7 +148,7 @@ if ($status) {
     Write-Host ""
     
     # Create commit
-    $commitMessage = "Daily update - $today (Day $dayNumber of 30)"
+    $commitMessage = "Day $dayNumber of 30 - Daily update ($today)"
     Write-Host "Creating commit..." -ForegroundColor Yellow
     git commit -m $commitMessage
     
@@ -107,8 +164,10 @@ if ($status) {
             Write-Host ""
             Write-Host "Statistics:" -ForegroundColor Cyan
             Write-Host "   - Date: $today" -ForegroundColor White
+            Write-Host "   - Time: $time" -ForegroundColor White
             Write-Host "   - Day: $dayNumber of 30" -ForegroundColor White
             Write-Host "   - Commit: $commitMessage" -ForegroundColor White
+            Write-Host "   - Progress: $([math]::Round(($dayNumber/30)*100, 1))%" -ForegroundColor White
         } else {
             Write-Host "Failed to push to GitHub!" -ForegroundColor Red
             Write-Host "Check internet connection or GitHub permissions" -ForegroundColor Yellow
@@ -120,7 +179,7 @@ if ($status) {
     }
 } else {
     Write-Host "No changes to push" -ForegroundColor Yellow
-    Write-Host "   (Maybe already pushed today)" -ForegroundColor Gray
+    Write-Host "   (This shouldn't happen - files should be updated)" -ForegroundColor Gray
 }
 
 Write-Host ""
