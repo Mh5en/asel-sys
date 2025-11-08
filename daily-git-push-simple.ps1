@@ -116,14 +116,17 @@ Working on the Asel System project. Making steady progress each day!
 
 "@
 
-# Add entry if not exists for today
-if ($logContent -notmatch "## Day $dayNumber - $today") {
-    $logContent += $newEntry
-    Set-Content -Path $logFile -Value $logContent -Encoding UTF8
-    Write-Host "Updated daily log file - Day $dayNumber" -ForegroundColor Green
+# Always add new entry for today (even if exists, we'll replace it)
+# This ensures we always have a change to commit
+if ($logContent -match "## Day $dayNumber - $today") {
+    # Replace existing entry with new one (to update time)
+    $logContent = $logContent -replace "(?s)## Day $dayNumber - $today.*?(?=---|## Day|\Z)", $newEntry
 } else {
-    Write-Host "Log entry for today already exists" -ForegroundColor Yellow
+    # Add new entry
+    $logContent += $newEntry
 }
+Set-Content -Path $logFile -Value $logContent -Encoding UTF8
+Write-Host "Updated daily log file - Day $dayNumber" -ForegroundColor Green
 
 # Update progress file
 $progressContent = @"
